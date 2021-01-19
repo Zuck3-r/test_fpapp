@@ -6,6 +6,7 @@ class PlannersController < ApplicationController
   
   def new
     @planner = Planner.new
+    @skills  = Skill.all
   end
   
   def create
@@ -21,7 +22,7 @@ class PlannersController < ApplicationController
 
   private
   def planner_params
-    params.require(:planner).permit(:name, :email, :password, :password_confirmation, :skill_id)
+    params.require(:planner).permit(:name, :email, :password, :password_confirmation, skill_ids: [])
   end
   
 end

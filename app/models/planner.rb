@@ -1,5 +1,6 @@
 class Planner < ApplicationRecord
-  has_many :skills
+  has_many :planner_skills
+  has_many :skills, through: :planner_skills
   #保存する前に小文字化
   before_save { self.email = email.downcase }
   
