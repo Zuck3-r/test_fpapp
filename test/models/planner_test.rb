@@ -22,6 +22,7 @@ class PlannerTest < ActiveSupport::TestCase
   end
   
   test "email should not too long" do
-    @planner.email = "a"*250+"@example.com"
+    @planner.email = "a"*256+"@example.com"
+    assert_not @planner.valid?
   end
 end
