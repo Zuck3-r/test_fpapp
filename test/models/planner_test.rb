@@ -16,12 +16,17 @@ class PlannerTest < ActiveSupport::TestCase
     assert_not @planner.valid?
   end
   
+  test "name should not be too long" do
+    @planner.name = "a"*41
+    assert_not @planner.valid?
+  end
+  
   test "email should be present" do
     @planner.email = "   "
     assert_not @planner.valid?
   end
   
-  test "email should not too long" do
+  test "email should not be too long" do
     @planner.email = "a"*256+"@example.com"
     assert_not @planner.valid?
   end
