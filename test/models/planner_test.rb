@@ -30,4 +30,10 @@ class PlannerTest < ActiveSupport::TestCase
     @planner.email = "a"*256+"@example.com"
     assert_not @planner.valid?
   end
+  test "email addresses should be unique" do
+    duplicate_planner = @planner.dup
+    @planner.save
+    duplicate_planner.email = @planner.email.upcase
+    assert_not duplicate_planner.valid?
+  end
 end
