@@ -19,7 +19,7 @@
   		<%= f.password_field :password_confirmation, class: 'form-control' %>
   		
   		<%= f.label :skill, "スキル" %>
-  		  <%= f.collection_check_boxes(:skill_ids, @skills, :id, :name) do |sk| %>
+  		  <%= f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk| %>
   		    <%= sk.label { sk.check_box + sk.text } %>
   		  <% end %>
   		<%= f.submit "新規作成", class: "btn btn-primary" %>
