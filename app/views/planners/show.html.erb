@@ -1,7 +1,8 @@
-<h1><%= @planner.name %></h1>
+<h1><%= current_user.name %></h1>
 <h2>得意な分野</h2>
 <%= @skills.each do |skill| %>
   <li>
       <%= skill.name %>
   </li>
 <% end%>
+<%= link_to "Log out", logout_path, method: :delete %>

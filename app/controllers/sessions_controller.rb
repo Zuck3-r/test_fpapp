@@ -11,11 +11,16 @@ class SessionsController < ApplicationController
     
     if @user&.authenticate(session_params[:password])
       log_in(@user)
-      redirect_to @user
+      redirect_to current_user
     else
       flash.now[:danger] = "メールアドレス、パスワードが違います"
       "https://www.yahoo.co.jp/"
     end
+  end
+  #ログアウト処理
+  def destroy
+    log_out if logged_in?
+    redirect_to root_url
   end
   
   private
