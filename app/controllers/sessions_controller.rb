@@ -4,14 +4,14 @@ class SessionsController < ApplicationController
   
   def create
     if session_params[:flag]=="0"
-      redirect_to "https://www.google.com/webhp?gl=us&hl=en&gws_rd=cr&pws=0"
+      @user = Customer.find_by(email: session_params[:email])
     elsif session_params[:flag]=="1"
-      user = Planner.find_by(email: session_params[:email])
+      @user = Planner.find_by(email: session_params[:email])
     end
     
-    if user&.authenticate(session_params[:password])
-      log_in(user)
-      redirect_to "https://www.google.com/webhp?gl=us&hl=en&gws_rd=cr&pws=0"
+    if @user&.authenticate(session_params[:password])
+      log_in(@user)
+      redirect_to @user
     else
       flash.now[:danger] = "メールアドレス、パスワードが違います"
       "https://www.yahoo.co.jp/"

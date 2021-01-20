@@ -18,6 +18,11 @@ class PlannersController < ApplicationController
       render 'new'
     end
   end
+  
+  def show
+    @planner = Planner.find(params[:id])
+    @skills = @planner.skills
+  end
 
 
   private
