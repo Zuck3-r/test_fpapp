@@ -14,6 +14,8 @@ module SessionsHelper
   def current_user
     if session[:user_id] && session[:role]=="Planner"
       @current_user ||= Planner.find_by(id: session[:user_id]) 
+    elsif session[:user_id] && session[:role]=="Customer"
+      @current_user ||= Customer.find_by(id: session[:user_id]) 
     end
   end
   

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       redirect_to current_user
     else
       flash.now[:danger] = "メールアドレス、パスワードが違います"
-      "https://www.yahoo.co.jp/"
+      redirect_to login_path
     end
   end
   #ログアウト処理
