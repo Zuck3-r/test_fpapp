@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  has_many :reservations
   
   #それぞれのデータへのバリデーション
   before_save { self.email = email.downcase }
