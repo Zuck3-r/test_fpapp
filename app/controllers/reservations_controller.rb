@@ -10,6 +10,12 @@ class ReservationsController < ApplicationController
 		end
 	end
 	
+	def destroy
+		@reservation = Reservation.find(params[:id])
+		@reservation.destroy
+		redirect_to current_user, success: '削除しました'
+	end
+		
 	private
 	
 	def reservation_params

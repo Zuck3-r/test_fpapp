@@ -10,9 +10,19 @@ h2
 
 - @reservations.each do |resv|
   p
+    |日にち
+    
     = resv.date
   p
+    | 時間
+    
     = resv.time_table.time_range
+  p
+    |キャンセル
+    
+    = link_to "削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
+  p
+    |-----------------------------------------------------------------------------------------------------------
 
 
 = link_to "Log out", logout_path, method: :delete, class: "btn btn-danger"

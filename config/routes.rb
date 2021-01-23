@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :planners
   resources :static_pages
   resources :customers
+  resources :reservations,          only: [:create, :update, :destroy]
 end
