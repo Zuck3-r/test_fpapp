@@ -22,6 +22,8 @@ class PlannersController < ApplicationController
   def show
     @planner = Planner.find(params[:id])
     @skills = @planner.skills
+    @reservations = Reservation.where(planner_id: params[:id])
+    #@reservations = []
   end
 
 

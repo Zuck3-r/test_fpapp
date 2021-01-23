@@ -1,8 +1,18 @@
 h1
   = current_user.name
+  = current_user.id
 h2
   | 得意な分野
 = @skills.each do |skill|
   li
     = skill.name
+== render '/reservations/planner_reservation'
+
+- @reservations.each do |resv|
+  p
+    = resv.date
+  p
+    = resv.time_table.time_range
+
+
 = link_to "Log out", logout_path, method: :delete, class: "btn btn-danger"

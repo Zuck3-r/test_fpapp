@@ -21,4 +21,8 @@ class TimeTable < ActiveHash::Base
     { id: 15, start_time: '17:00', end_time: '17:30' },
     { id: 16, start_time: '17:30', end_time: '18:00' }
   ]
+  
+  def time_range
+    "#{start_time} ~ #{end_time}"
+  end
 end

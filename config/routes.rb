@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get     '/choose', to: 'static_pages#choose'
+  post    '/planners/:id', to: 'reservations#create'
   root 'static_pages#home'
   resources :planners
   resources :static_pages
