@@ -23,7 +23,15 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+  #現在のユーザがプランナーなら真
+  def planner_user?
+    session[:role]=="Planner"
+  end
   
+  #現在のユーザがカスタマーなら真
+  def customer_user?
+    session[:role]=="Customer"
+  end
   #渡された値がログインユーザなら真
   def current_user?(user)
     user == current_user

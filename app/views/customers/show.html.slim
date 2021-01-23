@@ -1,3 +1,19 @@
 h1
   = current_user.name
 = link_to "Log out", logout_path, method: :delete, class: "btn btn-danger"
+
+- @reservations.each do |resv|
+  p
+  	|日にち：
+  	
+    = resv.date
+  p
+  	|時間：
+  	
+    = resv.time_table.time_range
+  p
+  	|プランナー名：
+  	
+  	= Planner.find_by(id: resv.planner_id).name
+  p
+  	|-----------------------------------------------------------------------------------

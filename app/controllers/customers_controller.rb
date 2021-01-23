@@ -19,6 +19,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @reservations = Reservation.all
   end
   
   private
