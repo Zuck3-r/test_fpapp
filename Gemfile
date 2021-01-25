@@ -59,3 +59,4 @@ gem 'pre-commit'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_hash'
+gem 'simple_calendar', '~> 2.0'

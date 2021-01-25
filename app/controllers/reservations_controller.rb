@@ -15,7 +15,18 @@ class ReservationsController < ApplicationController
 		@reservation.destroy
 		redirect_to current_user, success: '削除しました'
 	end
-		
+	
+	def update
+		@reservation = Reservation.find(params[:id])
+		if @reservation.customer_id != nil
+			@reservation.update_attribute(:customer_id, nil)
+			redirect_to
+		else
+			@reservation.update_attribute(:customer_id, current_user.id)
+			redirect_to current_user
+		end
+	end
+
 	private
 	
 	def reservation_params
