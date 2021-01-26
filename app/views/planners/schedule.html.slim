@@ -1,0 +1,24 @@
+h1
+	| 今後の日程
+
+
+- @reservations.each do |resv|
+  p
+    |日にち
+    
+    = resv.date
+  p
+    | 時間
+    
+    = resv.time_table.time_range
+  
+  p
+    |予約者名
+    
+    = Customer.find_by(id: resv.customer_id).name
+
+    = link_to "キャンセル", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
+  p
+    |-----------------------------------------------------------------------------------------------------------
+
+= link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}

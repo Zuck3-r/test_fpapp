@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
 		if @reservation.customer_id != nil
 			@reservation.update_attribute(:customer_id, nil)
 			redirect_to
-		else
+		elsif @reservation.customer_id == nil
 			@reservation.update_attribute(:customer_id, current_user.id)
 			redirect_to current_user
 		end

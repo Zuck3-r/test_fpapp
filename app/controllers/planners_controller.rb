@@ -35,7 +35,12 @@ class PlannersController < ApplicationController
     @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
     redirect_to root_url
   end
-
+  
+  def schedule
+    @reservations = Reservation.where(planner_id: current_user.id)
+    #@reservations = @reservations.where('date >= ?', Date.today)
+    @reservations = @reservations.where.not(customer_id: nil)
+  end
 
   private
   def planner_params
