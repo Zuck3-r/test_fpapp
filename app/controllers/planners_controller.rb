@@ -25,6 +25,16 @@ class PlannersController < ApplicationController
     @reservations = Reservation.where(planner_id: params[:id])
     #@reservations = []
   end
+  
+  def edit
+    @planner = Planner.find(params[:id])
+  end
+  
+  def update
+    @planner = Planner.find(params[:id])
+    @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
+    redirect_to root_url
+  end
 
 
   private

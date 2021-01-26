@@ -6,6 +6,11 @@ h2
 = @skills.each do |skill|
   li
     = skill.name
+
+h2
+  |得意な分野の追加
+  = link_to "分野の追加", edit_planner_url
+
 == render '/reservations/planner_reservation'
 
 - @reservations.each do |resv|
