@@ -44,5 +44,21 @@ module SessionsHelper
     @current_user = nil
   end
   
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "ログインしてください！"
+      redirect_to login_url
+    end
+  end
+
+  def correct_user
+    if session[:user_id] && session[:role]=="Planner"
+      @user = Planner.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
+    elsif session[:user_id] && session[:role]=="Customer"
+      @user = Customer.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
+    end
+  end
   
 end

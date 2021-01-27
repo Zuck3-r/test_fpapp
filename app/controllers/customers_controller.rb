@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :show]
+  before_action :correct_user,   only: [:edit, :update, :show]
+  
   def index
-    @customers = Customer.all
   end
 
   def new

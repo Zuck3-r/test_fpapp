@@ -1,4 +1,6 @@
 class PlannersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :show]
+  before_action :correct_user,   only: [:edit, :update, :show]
   
   def index
     @planners = Planner.all
@@ -23,7 +25,6 @@ class PlannersController < ApplicationController
     @planner = Planner.find(params[:id])
     @skills = @planner.skills
     @reservations = Reservation.where(planner_id: params[:id])
-    #@reservations = []
   end
   
   def edit
@@ -43,6 +44,7 @@ class PlannersController < ApplicationController
   end
 
   private
+  
   def planner_params
     params.require(:planner).permit(:name, :email, :password, :password_confirmation, skill_ids: [])
   end
