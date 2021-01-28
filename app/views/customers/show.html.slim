@@ -16,16 +16,10 @@ h1
   	
   	= Planner.find_by(id: resv.planner_id).name
   
-  - if resv.customer_id != nil
     p
-      |予約者名：
-      
-      = Customer.find_by(id: resv.customer_id).name
-      = link_to "予約を取り消す",  reservation_url(resv.id), method: :delete, class: "btn btn-danger"
-  - else
-    p
-      = link_to "予約する",  reservation_url(resv.id), method: :put, class: "btn btn-primary"
+      = link_to "予約する",  reservation_url(resv.id), method: :putch, class: "btn btn-primary"
 
   p
   	|-----------------------------------------------------------------------------------
   
+= link_to "予約日程", '/customers/schedule', class: "btn btn-primary"

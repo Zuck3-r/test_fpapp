@@ -22,6 +22,11 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @reservations = Reservation.all
+    @reservations = @reservations.where(customer_id: nil)
+  end
+  
+  def schedule
+    @reservations = Reservation.where(customer_id: current_user.id)
   end
   
   private

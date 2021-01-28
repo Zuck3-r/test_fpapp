@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get     '/planners/schedule', to: 'planners#schedule'
   post    '/planners/:id', to: 'reservations#create'
   post    '/planners/:id/edit', to: 'planners#update'
+  get     '/customers/schedule', to: 'customers#schedule'
+  post    '/reservations/:id', to: 'reservations#update'
   root 'static_pages#home'
   resources :planners
   resources :static_pages

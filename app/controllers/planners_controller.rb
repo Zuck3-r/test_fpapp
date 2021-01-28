@@ -1,4 +1,5 @@
 class PlannersController < ApplicationController
+  before_action :planner_user
   before_action :logged_in_user, only: [:edit, :update, :show]
   before_action :correct_user,   only: [:edit, :update, :show]
   
