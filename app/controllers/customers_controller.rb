@@ -23,6 +23,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @reservations = Reservation.all
     @reservations = @reservations.where(customer_id: nil)
+    @reservations = @reservations.where('date >= ?', Date.today)
   end
   
   def schedule

@@ -3,7 +3,7 @@ h1
   = current_user.id
 h2
   | 得意な分野
-= @skills.each do |skill|
+- @skills.each do |skill|
   li
     = skill.name
 

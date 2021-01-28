@@ -1,5 +1,4 @@
 class PlannersController < ApplicationController
-  before_action :planner_user
   before_action :logged_in_user, only: [:edit, :update, :show]
   before_action :correct_user,   only: [:edit, :update, :show]
   
@@ -26,6 +25,7 @@ class PlannersController < ApplicationController
     @planner = Planner.find(params[:id])
     @skills = @planner.skills
     @reservations = Reservation.where(planner_id: params[:id])
+    @reservations = @reservations.where('date >= ?', Date.today)
   end
   
   def edit

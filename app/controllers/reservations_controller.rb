@@ -4,11 +4,12 @@ class ReservationsController < ApplicationController
 		@reservation = Reservation.new(reservation_params)
 		@reservation.planner_id = session[:user_id]
 		
-		if @reservation.date.wday==0
-			redirect_to current_user, danger: "日曜日は仕事しないで！！"
-		elsif @reservation.date < Date.today
-			redirect_to current_user, danger: "過去改変は禁止されています"
+		
+		if @reservation.date <= Date.today
+			redirect_to current_user, danger: "本日以前の日程は登録できません"
 			#ここはモデルのとこにバリデーション置いてもええかも？
+		elsif @reservation.date.wday==0
+			redirect_to current_user, danger: "日曜日は仕事しないで！！"
 		elsif @reservation.save && planner_user?
 			redirect_to current_user, info: "登録出来ました"
 		else
