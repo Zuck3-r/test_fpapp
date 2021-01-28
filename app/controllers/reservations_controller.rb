@@ -10,6 +10,8 @@ class ReservationsController < ApplicationController
 			#ここはモデルのとこにバリデーション置いてもええかも？
 		elsif @reservation.date.wday==0
 			redirect_to current_user, danger: "日曜日は仕事しないで！！"
+		elsif @reservation.date.wday==6 && [*3..10].exclude?(@reservation.time_table_id)
+			redirect_to current_user, danger: "土曜のその時間は働けねぇよ！"
 		elsif @reservation.save && planner_user?
 			redirect_to current_user, info: "登録出来ました"
 		else
