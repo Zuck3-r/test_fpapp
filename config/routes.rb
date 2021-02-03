@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get     '/customers/schedule', to: 'customers#schedule'
   post    '/reservations/:id', to: 'reservations#update'
   root 'static_pages#home'
-  resource :planners
+  resources :planners
   resource :static_pages
-  resource :customers
-  resource :reservations,          only: [:create, :update, :destroy]
+  resources :customers
+  resources :reservations,          only: [:create, :update, :destroy]
 end
