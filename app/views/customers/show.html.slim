@@ -1,7 +1,14 @@
 h1
   = current_user.name
 = link_to "Log out", logout_path, method: :delete, class: "btn btn-danger"
-
+.search
+  h3
+    | 予約枠検索
+  = form_with url: customers_search_path, method: :get, local: true do |f|
+    = f.label :date, '日にち'
+    = f.date_field :date, min: Date.current + 1
+    br
+    = f.submit '検索', class: "btn btn-info"
 - @reservations.each do |resv|
   p
   	|日にち：

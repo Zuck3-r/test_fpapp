@@ -2,5 +2,5 @@
   = f.label :time_table_id
   = f.collection_select :time_table_id, TimeTable.all, :id, :time_range, prompt: "--"
   = f.label :date
-  = f.date_field :date, min: Date.current+1
+  = f.date_field :date, min: Date.current + 1
   = f.submit "登録", class: "btn btn-primary"

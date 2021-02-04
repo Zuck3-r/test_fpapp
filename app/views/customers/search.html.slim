@@ -1,0 +1,21 @@
+- @reservations.each do |resv|
+  p
+  	|日にち：
+  	
+    = resv.date
+  p
+  	|時間：
+  	
+    = resv.time_table.time_range
+  p
+  	|プランナー名：
+  	
+  	= Planner.find_by(id: resv.planner_id).name
+  
+    p
+      = link_to "予約する",  reservation_url(resv.id), method: :putch, class: "btn btn-primary"
+
+  p
+  	|-----------------------------------------------------------------------------------
+  	
+= link_to "トップに戻る", current_user, {class: "btn btn-outline-secondary"}

@@ -30,6 +30,11 @@ class CustomersController < ApplicationController
     @reservations = Reservation.where(customer_id: current_user.id)
   end
   
+  def search
+    @reservations = Reservation.all
+    @reservations = @reservations.where(date: params[:date])
+  end
+  
   private
   
   def customer_params

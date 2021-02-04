@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post    '/planners/:id', to: 'reservations#create'
   post    '/planners/:id/edit', to: 'planners#update'
   get     '/customers/schedule', to: 'customers#schedule'
+  get     '/customers/search', to: 'customers#search'
   post    '/reservations/:id', to: 'reservations#update'
   root 'static_pages#home'
   resources :planners
