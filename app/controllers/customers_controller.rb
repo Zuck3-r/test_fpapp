@@ -34,8 +34,10 @@ class CustomersController < ApplicationController
   end
   
   def search
+    @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
     @reservations = Reservation.all
     @reservations = @reservations.where(date: params[:date])
+    @reservations = @reservations.where(planner_id: @planners_ids)
   end
   
   private

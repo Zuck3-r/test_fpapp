@@ -10,7 +10,8 @@ table.table
       th scope="col"  時間
       th scope="col"  予約者名
       th scope="col"  プランナー名
-
+      th scope="col"  スキル
+      
 - @reservations.each do |resv|
   table.table
     tbody
@@ -20,6 +21,9 @@ table.table
         td= resv.time_table.time_range
         td= Customer.find_by(id: resv.customer_id).name
         td= Planner.find_by(id: resv.planner_id).name
+        - skill_names = []
+        - Planner.find_by(id: resv.planner_id).skills.map { |n| skill_names << n.name }
+        td= skill_names
 
 
 = link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}

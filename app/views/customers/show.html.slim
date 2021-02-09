@@ -7,6 +7,8 @@ h1
   = form_with url: customers_search_path, method: :get, local: true do |f|
     = f.label :date, '日にち'
     = f.date_field :date, min: Date.current + 1
+    = f.label :skill, "スキル"
+    = f.collection_select(:skill_ids, Skill.all, :id, :name)
     br
     = f.submit '検索', class: "btn btn-info"
 - @reservations.each do |resv|
