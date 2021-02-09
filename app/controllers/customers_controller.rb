@@ -21,6 +21,9 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    if @customer == nil
+      redirect_to current_user
+    end
     @reservations = Reservation.all
     @reservations = @reservations.where(customer_id: nil)
     @reservations = @reservations.where('date >= ?', Date.today)

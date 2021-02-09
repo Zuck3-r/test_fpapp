@@ -53,11 +53,19 @@ module SessionsHelper
 
   def correct_user
     if session[:user_id] && session[:role]=="Planner"
-      @user = Planner.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      if Planner.exists?(id: params[:id])
+        @user = Planner.find(params[:id])
+        redirect_to(root_url) unless @user == current_user
+      else
+        redirect_to(root_url)
+      end
     elsif session[:user_id] && session[:role]=="Customer"
-      @user = Customer.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      if Customer.exists?(id: params[:id])
+        @user = Customer.find(params[:id])
+        redirect_to(root_url) unless @user == current_user
+      else
+        redirect_to(root_url)
+      end
     end
   end
   
