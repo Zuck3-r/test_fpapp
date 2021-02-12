@@ -9,4 +9,12 @@ class Customer < ApplicationRecord
   
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+    def no_4_bytes
+      if name.present?
+        chars = name.each_char.select{|c| c.bytes.count >= 4}
+        if chars.size > 0
+          errors.add(:name, "に絵文字(#{chars.join('')})は使用できません。")
+        end
+      end
+    end
 end
