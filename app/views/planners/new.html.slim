@@ -12,7 +12,8 @@ h1
       = f.password_field :password, class: 'form-control'
       = f.label :password_confirmation, "Confirmation"
       = f.password_field :password_confirmation, class: 'form-control'
-      = f.label :skill, "スキル"
+      = f.label :skill, "スキル", class: 'form-check-input'
+      br
       = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
         = sk.label { sk.check_box + sk.text }
       = f.submit "新規作成", class: "btn btn-primary"

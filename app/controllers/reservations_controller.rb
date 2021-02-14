@@ -21,8 +21,12 @@ class ReservationsController < ApplicationController
 	
 	def destroy
 		@reservation = Reservation.find(params[:id])
-		@reservation.destroy
-		redirect_to current_user, success: '削除しました'
+		if @reservation.customer_id != nil
+			redirect_to request.referer, info: "予約入ってんぞ～"
+		else
+			@reservation.destroy
+			redirect_to current_user, success: '削除しました'
+		end
 	end
 	
 	def update
