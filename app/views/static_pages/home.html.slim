@@ -1,9 +1,22 @@
-.fixed-top
-  .float-right
-    |  　　
-    = link_to "新規登録", choose_path ,{class: "btn btn-primary pull-left btn-lg"}
-    = link_to "ログイン", login_url ,{class: "btn btn-info pull-right btn-lg"}
-span
-  |  夢や目標はありませんか？
-p
-  | ライフスタイルや価値観、経済環境を踏まえながら、家族状況、収入と支出の内容、資産、負債、保険など、あらゆるデータを集めて、現状を真摯に分析いたします
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+    ul.navbar-nav
+      li.nav-item
+        = link_to "新規登録", choose_path ,{class: "nav-link"}
+      li.nav-item
+        = link_to "ログイン", login_url ,{class: "nav-link"}
+
+.center
+  .middle
+    h3
+      |夢や目標はありませんか？
+      
+    p
+      |ライフスタイルや価値観、経済環境を踏まえながら、
+      
+    p
+      |家族状況、収入と支出の内容、資産、負債、保険など、あらゆるデータを集め,
+    
+    p
+      |現状を真摯に分析いたします
