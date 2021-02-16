@@ -11,6 +11,7 @@ table.table
       th scope="col"  予約者名
       th scope="col"  プランナー名
       th scope="col"  スキル
+      th scope="col"  キャンセル
       
 - @reservations.each do |resv|
   table.table
@@ -24,6 +25,7 @@ table.table
         - skill_names = []
         - Planner.find_by(id: resv.planner_id).skills.map { |n| skill_names << n.name }
         td= skill_names
+        td= link_to "キャンセル",  reservation_url(resv.id), method: :putch, class: "btn btn-danger"
 
 
 = link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}

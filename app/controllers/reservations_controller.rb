@@ -6,7 +6,7 @@ class ReservationsController < ApplicationController
 		
 		
 		if @reservation.date <= Date.today
-			redirect_to current_user, danger: "本日以前の日程は登録できません"
+			redirect_to current_user, danger: "過去には戻れんのや..."
 			#ここはモデルのとこにバリデーション置いてもええかも？
 		elsif @reservation.date.wday==0
 			redirect_to current_user, danger: "日曜日は仕事しないで！！"
