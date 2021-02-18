@@ -1,34 +1,48 @@
-h1
-  = current_user.name
-= link_to "Log out", logout_path, method: :delete, class: "btn btn-danger"
-.search
-  h3
-    | 予約枠検索
-  = form_with url: customers_search_path, method: :get, local: true do |f|
-    = f.label :date, '日にち'
-    = f.date_field :date, min: Date.current + 1
-    = f.label :skill, "スキル"
-    = f.collection_select(:skill_ids, Skill.all, :id, :name)
-    br
-    = f.submit '検索', class: "btn btn-info"
-- @reservations.each do |resv|
-  p
-  	|日にち：
-  	
-    = resv.date
-  p
-  	|時間：
-  	
-    = resv.time_table.time_range
-  p
-  	|プランナー名：
-  	
-  	= Planner.find_by(id: resv.planner_id).name
-  
-    p
-      = link_to "予約する",  reservation_url(resv.id), method: :putch, class: "btn btn-primary"
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+    ul.navbar-nav
+      li.nav-item
+        = link_to "予約日程", customers_schedule_url ,{class: "nav-link"}
+      li.nav-item
+        = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
+.center
+  .middle
+    h1
+      |お客様名：
+      = current_user.name
+      
 
-  p
-  	|-----------------------------------------------------------------------------------
+.center
+  .middle
+    h4
+      | 予約枠検索
+  
+    = form_with url: customers_search_path, method: :get, local: true do |f|
+      = f.label :date, '日にち'
+      = f.date_field :date, min: Date.current + 1
+      = f.label :skill, "スキル"
+      = f.collection_select(:skill_ids, Skill.all, :id, :name)
+      = f.submit '検索', class: "btn btn-info"
+    
+    - @reservations.each do |resv|
+      p
+  	    |日にち：
+  	
+        = resv.date
+      p
+  	    |時間：
+  	
+        = resv.time_table.time_range
+      p
+  	    |プランナー名：
+  	
+  	    = Planner.find_by(id: resv.planner_id).name
+  
+      p
+        = link_to "予約する",  reservation_url(resv.id), method: :putch, class: "btn btn-primary"
+
+      p
+  	    |-----------------------------------------------------------------------------------
   
 = link_to "予約日程", '/customers/schedule', class: "btn btn-primary"
