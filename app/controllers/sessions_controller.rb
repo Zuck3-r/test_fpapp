@@ -11,10 +11,9 @@ class SessionsController < ApplicationController
     
     if @user&.authenticate(session_params[:password])
       log_in(@user)
-      redirect_to current_user
+      redirect_to current_user, info: 'ログインしました'
     else
-      flash.now[:danger] = "メールアドレス、パスワードが違います"
-      redirect_to login_path
+      redirect_to login_path, danger: "メールアドレス、パスワードが違います"
     end
   end
   #ログアウト処理
