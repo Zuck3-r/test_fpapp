@@ -2,27 +2,32 @@ header.navbar.navbar-expand-sm.navbar-light.bg-light
   .container
     = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
 
-h1
-  | フィナンシャルプランナー様　新規ご登録
+.center
+  .middle
+  h1
+    | フィナンシャルプランナー様　新規ご登録
 
-= form_with model: @planner, local: true do |f|
-  = render 'shared/error_messages', object: f.object
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control'
-  .form-group
-    = f.label :email
-    = f.email_field :email, class: 'form-control'
-  .form-group
-    = f.label :password
-    = f.password_field :password, class: 'form-control'
-  .form-group
-    = f.label :password_confirmation, "Confirmation"
-    = f.password_field :password_confirmation, class: 'form-control'
-  .form-group
-    = f.label :skill, 'スキル'
-    br
-    = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
-      = sk.label { sk.check_box + sk.text }
-  = f.submit "新規作成", class: "btn btn-primary"
-= link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}
+.container-fluid
+  .row.mt-5
+    .col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4
+      .card.card-body
+        = form_with(model: @planner, local: true) do |f|
+          = render 'shared/error_messages', object: f.object
+          
+          = f.label :name, '名前'
+          = f.text_field :name, class: 'form-control'
+
+          = f.label :email
+          = f.email_field :email, class: 'form-control'
+
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, class: 'form-control'
+
+          = f.label :skill, 'スキル'
+          br
+          = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
+            = sk.label { sk.check_box + sk.text }
+          = f.submit '新規登録', class: 'btn btn-primary btn-block mt-4'
