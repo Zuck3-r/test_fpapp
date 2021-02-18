@@ -1,3 +1,7 @@
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+
 h1
   | フィナンシャルプランナー様　新規ご登録
 
@@ -16,9 +20,8 @@ h1
     = f.label :password_confirmation, "Confirmation"
     = f.password_field :password_confirmation, class: 'form-control'
   .form-group
-    = f.label :skill, "スキル", class: 'form-check-input'
+    = f.label :skill, 'スキル'
     br
-    
     = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
       = sk.label { sk.check_box + sk.text }
   = f.submit "新規作成", class: "btn btn-primary"

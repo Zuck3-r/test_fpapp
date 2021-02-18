@@ -1,30 +1,42 @@
-h1
-  = current_user.name
-h2
-  | 得意な分野
-- @skills.each do |skill|
-  li
-    = skill.name
-
-h2
-  |得意な分野の追加
-  = link_to "分野の追加", edit_planner_url
-
-== render '/reservations/planner_reservation'
-
-- @reservations.each do |resv|
-  p
-    |日にち
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+    ul.navbar-nav
+      li.nav-item
+        = link_to "今後の日程", planners_schedule　_url ,{class: "nav-link"}
+      li.nav-item
+        = link_to "スキルの変更・確認", edit_planner_url ,{class: "nav-link"}
+      li.nav-item
+        = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
+.center
+  .middle
+    h1
+      | プランナー名：
+      = current_user.name
     
-    = resv.date
-  p
-    | 時間
+    h2
+      | 得意な分野
+        
+      - @skills.each do |skill|
+        li
+          = skill.name
+
+
+.center
+  .middle
+    == render '/reservations/planner_reservation'
     
-    = resv.time_table.time_range
+    - @reservations.each do |resv|
+      p
+        |日にち
+        
+      = resv.date
+      
+      p
+        | 時間
+        
+      = resv.time_table.time_range
 
-    = link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
-  p
-    |-----------------------------------------------------------------------------------------------------------
-
-= link_to "今後の日程", '/planners/schedule', class: "btn btn-primary"
-= link_to "Log out", logout_path, method: :delete, class: "btn btn-danger pull-right btn-lg"
+      = link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
+      p
+        |-----------------------------------------------------------------------------------------------------------

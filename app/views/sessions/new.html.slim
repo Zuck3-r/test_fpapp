@@ -1,10 +1,16 @@
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand"
 h1
   | ログイン
 = form_with scope: :session, local: true do |f|
-  = f.label :email
-  = f.email_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.label :flag, "FPの方はこちらをチェック"
-  = f.check_box :flag
+  .form-group
+    = f.label :email, "メールアドレス"
+    = f.email_field :email
+  .form-group
+    = f.label :password
+    = f.password_field :password
+  .form-group
+    = f.label :flag, "FPの方はこちらをチェック"
+    = f.check_box :flag
   = f.submit "ログイン", class: "btn btn-primary"
