@@ -1,11 +1,14 @@
 class ReservationsController < ApplicationController
+	before_action :login_required
+	before_action :check_planner, only: [:create, :destroy]
+	before_action :check_customer, only: [:update ]
 	
 	def create
 		@reservation = Reservation.new(reservation_params)
 		@reservation.planner_id = session[:user_id]
-		
-		
-		if @reservation.date <= Date.today
+		if @reservation.invalid?
+			redirect_to current_user
+		elsif @reservation.date <= Date.today
 			redirect_to current_user, danger: "過去には戻れんのや..."
 			#ここはモデルのとこにバリデーション置いてもええかも？
 		elsif @reservation.date.wday==0
@@ -22,7 +25,7 @@ class ReservationsController < ApplicationController
 	def destroy
 		@reservation = Reservation.find(params[:id])
 		if @reservation.customer_id != nil
-			redirect_to request.referer, info: "予約入ってんぞ～"
+			redirect_to request.referer, danger: '予約入ってんぞ～'
 		else
 			@reservation.destroy
 			redirect_to current_user, success: '削除しました'

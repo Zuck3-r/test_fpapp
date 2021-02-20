@@ -1,7 +1,5 @@
 class PlannersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show]
-  before_action :correct_user,   only: [:edit, :update, :show]
-  
+  before_action :login_required, only: [:edit, :update, :show]
   
   def new
     @planner = Planner.new
@@ -19,18 +17,18 @@ class PlannersController < ApplicationController
   end
   
   def show
-    @planner = Planner.find(params[:id])
+    @planner = Planner.find(current_user.id)
     @skills = @planner.skills
-    @reservations = Reservation.where(planner_id: params[:id])
+    @reservations = Reservation.where(planner_id: @planner.id)
     @reservations = @reservations.where('date >= ?', Date.today)
   end
   
   def edit
-    @planner = Planner.find(params[:id])
+    @planner = Planner.find(current_user.id)
   end
   
   def update
-    @planner = Planner.find(params[:id])
+    @planner = Planner.find(current_user.id)
     @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
     redirect_to root_url
   end

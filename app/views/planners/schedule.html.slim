@@ -1,5 +1,7 @@
-h1
-	| 今後の日程
+.center
+  .middle
+    h1
+      | 今後の日程
 
 
 - @reservations.each do |resv|
@@ -17,7 +19,6 @@ h1
     
     = Customer.find_by(id: resv.customer_id).name
 
-    = link_to "キャンセル", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
   p
     |-----------------------------------------------------------------------------------------------------------
 

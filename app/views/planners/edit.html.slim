@@ -1,11 +1,18 @@
-h1
-  | フィナンシャルプランナー様　新規ご登録
-.row
-  .col-md-6.col-md-offset-3
-    = form_with model: @planner, local: true do |f|
-      = f.label :skill, "スキル"
-      = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
-        = sk.label { sk.check_box + sk.text }
-      = f.submit "更新", class: "btn btn-primary"
+.center
+  .middle
+    h1
+      | スキルの変更・確認
+
+.container-fluid
+  .row.mt-5
+    .col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4
+      .card.card-body
+        = form_with model: @planner, local: true do |f|
+          = f.label :skill, "スキル"
+          br
+          = f.collection_check_boxes(:skill_ids, Skill.all, :id, :name) do |sk|
+            = sk.label { sk.check_box + sk.text }
+            br
+          = f.submit "更新", class: "btn btn-primary"
       
 = link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}

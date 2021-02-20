@@ -1,10 +1,7 @@
 class CustomersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show]
-  before_action :correct_user,   only: [:edit, :update, :show]
+  before_action :login_required, only: [:edit, :update, :show]
+  # before_action :check_if_correct_user,   only: [:edit, :update, :show]
   
-  def index
-  end
-
   def new
     @customer = Customer.new
   end
@@ -20,10 +17,7 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(params[:id])
-    if @customer == nil
-      redirect_to current_user
-    end
+    @customer = Customer.find(current_user.id)
     @reservations = Reservation.all
     @reservations = @reservations.where(customer_id: nil)
     @reservations = @reservations.where('date >= ?', Date.today)
