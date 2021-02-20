@@ -46,10 +46,6 @@ module SessionsHelper
     !current_user.nil?
   end
 
-  def planner_user?
-    session[:role] == 'Planner'
-  end
-
 
   # def current_user?(user)
   #   user == current_user

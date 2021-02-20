@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get     '/customers/search', to: 'customers#search'
   post    '/reservations/:id', to: 'reservations#update'
   root 'static_pages#home'
-  resources :planners
+  resources :planners, only: %i[new create show edit update destroy search]
+  resources :customers, only: %i[new create show edit update destroy search]
   resource :static_pages
-  resources :customers
   resources :reservations,          only: [:create, :update, :destroy]
 end
