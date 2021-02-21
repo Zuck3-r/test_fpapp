@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
 			redirect_to current_user, danger: "日曜日は仕事しないで！！"
 		elsif @reservation.date.wday==6 && [*3..10].exclude?(@reservation.time_table_id)
 			redirect_to current_user, danger: "土曜のその時間は働けねぇよ！"
-		elsif @reservation.save && planner_user?
+		elsif @reservation.save
 			redirect_to current_user, info: "登録出来ました"
 		else
 			redirect_to current_user, danger: "無効な日時が指定されました"
