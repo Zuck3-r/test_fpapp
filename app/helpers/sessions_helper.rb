@@ -24,7 +24,7 @@ module SessionsHelper
   end
   
   def login_required
-    redirect_to root_url unless current_user
+    redirect_to root_url, danger: "ログインしてくれYO！" unless current_user
   end
   
 
@@ -35,11 +35,11 @@ module SessionsHelper
 
   
   def check_planner
-    redirect_to root_url unless session[:role]=="Planner"
+    redirect_to root_url, danger: "そのページは開けないよ！" unless session[:role]=="Planner"
   end
   
   def check_customer
-    redirect_to root_url unless session[:role]=="Customer"
+    redirect_to root_url, danger: "そのページは開けないよ！" unless session[:role]=="Customer"
   end
   
 end

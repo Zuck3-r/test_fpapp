@@ -25,7 +25,7 @@ table.table
         - skill_names = []
         - Planner.find_by(id: resv.planner_id).skills.map { |n| skill_names << n.name }
         td= skill_names
-        td= link_to "キャンセル",  reservation_url(resv.id), method: :putch, class: "btn btn-danger"
+        td= link_to "キャンセル",  reservation_url(resv.id), method: :putch, class: "btn btn-danger", data:{confirm: "予約をキャンルします宜しいですか？"}
 
 
 = link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}

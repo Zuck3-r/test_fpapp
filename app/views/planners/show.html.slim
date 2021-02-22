@@ -14,29 +14,26 @@ header.navbar.navbar-expand-sm.navbar-light.bg-light
       | プランナー名：
       = current_user.name
     
-    h2
-      | 得意な分野
-        
-      - @skills.each do |skill|
-        li
-          = skill.name
 
 
 .center
   .middle
-    == render '/reservations/planner_reservation'
+  h2
+    |予約枠を取る
     
-    - @reservations.each do |resv|
-      p
-        |日にち
-        
-      = resv.date
+  == render '/reservations/planner_reservation'
+    
+  - @reservations.each do |resv|
+    p
+      |日にち
       
-      p
-        | 時間
-        
-      = resv.time_table.time_range
+    = resv.date
+      
+    p
+      | 時間
+      
+    = resv.time_table.time_range
 
-      = link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
-      p
-        |-----------------------------------------------------------------------------------------------------------
+    = link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
+    p
+      |-----------------------------------------------------------------------------------------------------------

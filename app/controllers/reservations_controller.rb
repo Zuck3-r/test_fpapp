@@ -6,19 +6,21 @@ class ReservationsController < ApplicationController
 	def create
 		@reservation = Reservation.new(reservation_params)
 		@reservation.planner_id = session[:user_id]
-		if @reservation.invalid?
-			redirect_to current_user
-		elsif @reservation.date <= Date.today
-			redirect_to current_user, danger: "過去には戻れんのや..."
-			#ここはモデルのとこにバリデーション置いてもええかも？
-		elsif @reservation.date.wday==0
-			redirect_to current_user, danger: "日曜日は仕事しないで！！"
-		elsif @reservation.date.wday==6 && [*3..10].exclude?(@reservation.time_table_id)
-			redirect_to current_user, danger: "土曜のその時間は働けねぇよ！"
-		elsif @reservation.save
+		if @reservation.save
 			redirect_to current_user, info: "登録出来ました"
 		else
-			redirect_to current_user, danger: "無効な日時が指定されました"
+			redirect_to current_user, danger: "無効な値が指定されています"
+		# # elsif @reservation.date <= Date.today
+		# # 	redirect_to current_user, danger: "過去には戻れんのや..."
+		# # 	#ここはモデルのとこにバリデーション置いてもええかも？
+		# # elsif @reservation.date.wday==0
+		# # 	redirect_to current_user, danger: "日曜日は仕事しないで！！"
+		# # elsif @reservation.date.wday==6 && [*3..10].exclude?(@reservation.time_table_id)
+		# # 	redirect_to current_user, danger: "土曜のその時間は働けねぇよ！"
+		# elsif @reservation.save
+		# 	redirect_to current_user, info: "登録出来ました"
+		# else
+		# 	redirect_to current_user, danger: "無効な日時が指定されました"
 		end
 	end
 	

@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
-  before_action :login_required, only: [:edit, :update, :show]
-  before_action :check_customer, only: [:edit, :update, :show]
+  before_action :login_required, only: [:edit, :update, :show, :schedule, :search]
+  before_action :check_customer, only: [:edit, :update, :show, :schedule, :search]
   
   def new
     @customer = Customer.new

@@ -1,6 +1,6 @@
 class PlannersController < ApplicationController
-  before_action :login_required, only: [:edit, :update, :show]
-  before_action :check_planner, only: [:edit, :update, :show]
+  before_action :login_required, only: [:edit, :update, :show, :schedule]
+  before_action :check_planner, only: [:edit, :update, :show, :schedule]
   
   def new
     @planner = Planner.new

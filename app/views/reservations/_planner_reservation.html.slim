@@ -1,8 +1,9 @@
 = form_with scope: :reservation, local: true do |f|
-  = f.label :"時間帯"
+  = f.label :"日付選択："
+  = f.date_field :date, min: Date.current + 1
   br
+  = f.label :"時間帯選択："
   = f.collection_select :time_table_id, TimeTable.all, :id, :time_range, prompt: "--"
   br
-  = f.label :"日付"
-  = f.date_field :date, min: Date.current + 1
   = f.submit "登録", class: "btn btn-primary"
+  

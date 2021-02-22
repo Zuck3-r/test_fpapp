@@ -1,3 +1,13 @@
+header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+    ul.navbar-nav
+      li.nav-item
+        = link_to "今後の日程", planners_schedule_path ,{class: "nav-link"}
+
+      li.nav-item
+        = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
+
 .center
   .middle
     h1
