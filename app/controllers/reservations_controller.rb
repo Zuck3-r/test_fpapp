@@ -39,7 +39,7 @@ class ReservationsController < ApplicationController
 			redirect_to '/customers/schedule'
 		elsif @reservation.customer_id == nil
 			@reservation.update_attribute(:customer_id, current_user.id)
-			redirect_to current_user
+			redirect_to '/customers/schedule'
 		end
 	end
 
