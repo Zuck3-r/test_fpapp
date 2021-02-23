@@ -10,17 +10,6 @@ class ReservationsController < ApplicationController
 			redirect_to current_user, info: "登録出来ました"
 		else
 			redirect_to current_user, danger: "無効な値が指定されています"
-		# # elsif @reservation.date <= Date.today
-		# # 	redirect_to current_user, danger: "過去には戻れんのや..."
-		# # 	#ここはモデルのとこにバリデーション置いてもええかも？
-		# # elsif @reservation.date.wday==0
-		# # 	redirect_to current_user, danger: "日曜日は仕事しないで！！"
-		# # elsif @reservation.date.wday==6 && [*3..10].exclude?(@reservation.time_table_id)
-		# # 	redirect_to current_user, danger: "土曜のその時間は働けねぇよ！"
-		# elsif @reservation.save
-		# 	redirect_to current_user, info: "登録出来ました"
-		# else
-		# 	redirect_to current_user, danger: "無効な日時が指定されました"
 		end
 	end
 	
@@ -36,12 +25,15 @@ class ReservationsController < ApplicationController
 	
 	def update
 		@reservation = Reservation.find(params[:id])
-		if @reservation.customer_id != nil && @reservation.customer_id == current_user.id
+		# if @reservation.customer_id != nil && @reservation.customer_id == current_user.id
+		if @reservation.customer_id != nil && right_customer?
 			@reservation.update_attribute(:customer_id, nil)
-			redirect_to '/customers/schedule'
+			redirect_to customers_schedule_url, info: '予約をキャンセルしました'
 		elsif @reservation.customer_id == nil
 			@reservation.update_attribute(:customer_id, current_user.id)
-			redirect_to '/customers/schedule'
+			redirect_to '/customers/schedule', info: '予約出来ました'
+		else
+			redirect_to '/customers/schedule', danger: '先約があります'
 		end
 	end
 
@@ -49,5 +41,9 @@ class ReservationsController < ApplicationController
 	
 	def reservation_params
 		params.require(:reservation).permit(:time_table_id, :date)
+	end
+	
+	def right_customer?
+		@reservation.customer_id == current_user.id
 	end
 end

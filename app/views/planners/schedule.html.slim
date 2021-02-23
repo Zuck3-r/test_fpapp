@@ -3,6 +3,10 @@ header.navbar.navbar-expand-sm.navbar-light.bg-light
     = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
     ul.navbar-nav
       li.nav-item
+        = link_to "今後の日程", planners_schedule_path ,{class: "nav-link"}
+      li.nav-item
+        = link_to "スキルの変更・確認", edit_planner_path(current_user) ,{class: "nav-link"}
+      li.nav-item
         = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
 
 .center
