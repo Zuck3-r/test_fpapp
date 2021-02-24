@@ -31,15 +31,21 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+  
+  def session_planner?
+    session[:role]=="Planner"
+  end
 
-
+  def session_customer?
+    session[:role]=="Customer"
+  end
   
   def check_planner
-    redirect_to root_url, danger: "そのページは開けないよ！" unless session[:role]=="Planner"
+    redirect_to root_url, danger: "そのページは開けないよ！" unless session_planner?
   end
   
   def check_customer
-    redirect_to root_url, danger: "そのページは開けないよ！" unless session[:role]=="Customer"
+    redirect_to root_url, danger: "そのページは開けないよ！" unless session_customer?
   end
   
 end

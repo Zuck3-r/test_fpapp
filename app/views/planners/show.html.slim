@@ -1,39 +1,32 @@
-header.navbar.navbar-expand-sm.navbar-light.bg-light
-  .container
-    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
-    ul.navbar-nav
-      li.nav-item
-        = link_to "今後の日程", planners_schedule_url ,{class: "nav-link"}
-      li.nav-item
-        = link_to "スキルの変更・確認", edit_planner_url ,{class: "nav-link"}
-      li.nav-item
-        = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
 .center
   .middle
     h1
       | プランナー名：
       = current_user.name
     
-
-
 .center
   .middle
   h2
-    |予約枠を取る
+    |予約枠を作成する
     
   == render '/reservations/planner_reservation'
-    
-  - @reservations.each do |resv|
-    p
-      |日にち
-      
-    = resv.date
-      
-    p
-      | 時間
-      
-    = resv.time_table.time_range
 
-    = link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}
-    p
-      |-----------------------------------------------------------------------------------------------------------
+.center
+  .middle
+  p
+    |未予約の枠一覧
+
+table.table
+  thead.thead-dark
+    tr
+      th scope="col"  日にち
+      th scope="col"  時間
+      th scope="col"  日程の削除
+      
+- @reservations.each do |resv|
+  table.table
+    tbody
+      tr
+        td= resv.date
+        td= resv.time_table.time_range
+        td= link_to "日程の削除", reservation_url(resv.id), method: :delete, data:{confirm: "削除しますか？"}

@@ -1,14 +1,14 @@
-h1
-	| 今後の日程
+.center
+  .middle
+    h1
+	    | 今後の日程
 
 
 table.table
   thead.thead-dark
     tr
-      th scope="col"  #
       th scope="col"  日にち
       th scope="col"  時間
-      th scope="col"  予約者名
       th scope="col"  プランナー名
       th scope="col"  スキル
       th scope="col"  キャンセル
@@ -17,10 +17,8 @@ table.table
   table.table
     tbody
       tr
-        th scope="row" 予約
         td= resv.date
         td= resv.time_table.time_range
-        td= Customer.find_by(id: resv.customer_id).name
         td= Planner.find_by(id: resv.planner_id).name
         - skill_names = []
         - Planner.find_by(id: resv.planner_id).skills.map { |n| skill_names << n.name }
@@ -28,5 +26,4 @@ table.table
         td= link_to "キャンセル",  reservation_url(resv.id), method: :putch, class: "btn btn-danger", data:{confirm: "予約をキャンルします宜しいですか？"}
 
 
-= link_to "トップに戻る", root_url, {class: "btn btn-outline-secondary"}
 = stylesheet_link_tag "customers", :media => "all"

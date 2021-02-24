@@ -7,6 +7,32 @@ html
     = csp_meta_tag
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+
+  header.navbar.navbar-expand-sm.navbar-light.bg-light
+    .container
+      = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
+      - if session_planner?
+          ul.navbar-nav
+            li.nav-item
+              = link_to "今後の日程", planners_schedule_url ,{class: "nav-link"}
+            li.nav-item
+              = link_to "スキルの変更・確認", edit_planner_path(current_user) ,{class: "nav-link"}
+            li.nav-item
+              = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
+      - elsif session_customer?
+        ul.navbar-nav
+          li.nav-item
+            = link_to "予約日程", customers_schedule_url ,{class: "nav-link"}
+          li.nav-item
+            = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
+      - else
+        ul.navbar-nav
+          li.nav-item
+            = link_to "新規登録", choose_path ,{class: "nav-link"}
+          li.nav-item
+            = link_to "ログイン", login_url ,{class: "nav-link"}
+      
   - flash.each do |key, value|
     |  <p class="alert alert-
     = key

@@ -1,11 +1,3 @@
-header.navbar.navbar-expand-sm.navbar-light.bg-light
-  .container
-    = link_to "Matching Financial Planner", root_path, class: "navbar-brand mr-auto"
-    ul.navbar-nav
-      li.nav-item
-        = link_to "予約日程", customers_schedule_url ,{class: "nav-link"}
-      li.nav-item
-        = link_to "ログアウト", logout_path ,class: "nav-link", method: :delete
 .center
   .middle
     h1
@@ -44,5 +36,3 @@ header.navbar.navbar-expand-sm.navbar-light.bg-light
 
       p
   	    |-----------------------------------------------------------------------------------
-  
-= link_to "予約日程", '/customers/schedule', class: "btn btn-primary"
