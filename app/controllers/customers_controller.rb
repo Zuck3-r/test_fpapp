@@ -25,13 +25,15 @@ class CustomersController < ApplicationController
   
   def schedule
     @reservations = Reservation.where(customer_id: current_user.id)
+    @reservations = @reservations.where('date >= ?', Date.today)
   end
   
   def search
     @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
-    @reservations = Reservation.all
-    @reservations = @reservations.where(date: params[:date])
-    @reservations = @reservations.where(planner_id: @planners_ids)
+    @reservations = Reservation.where(date: params[:date], planner_id: @planners_ids)
+    unless @reservations.nil?
+      redirect_to "https://www.google.com/?hl=ja"
+    end
   end
   
   private

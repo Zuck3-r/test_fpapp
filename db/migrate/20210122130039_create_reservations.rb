@@ -5,8 +5,8 @@ class CreateReservations < ActiveRecord::Migration[6.1]
       t.date :date
       t.integer :planner_id
       t.integer :customer_id
-
       t.timestamps
     end
+    add_index :reservations, %i[planner_id time_table_id date], unique: true
   end
 end
