@@ -17,6 +17,13 @@
       = f.collection_select(:skill_ids, Skill.all, :id, :name)
       = f.submit '検索', class: "btn btn-info"
     
+    /div[style="font-size: 84%; width: 740px; text-align: right;"]
+    p
+      |※日曜は営業致しておりません
+       土曜の営業時間は11:00〜15:00となっております。
+       ご理解の程よろしくお願いいたします。
+    
+    
     /- @reservations.each do |resv|
       p
   	    |日にち：
