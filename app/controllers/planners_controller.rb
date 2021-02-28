@@ -20,6 +20,7 @@ class PlannersController < ApplicationController
   def show
     @planner = Planner.find(current_user.id)
     @skills = @planner.skills
+    @reservation = Reservation.new
     @reservations = Reservation.where(planner_id: @planner.id)
     @reservations = @reservations.where('date >= ?', Date.today)
   end
@@ -36,7 +37,7 @@ class PlannersController < ApplicationController
   
   def schedule
     @reservations = Reservation.where(planner_id: current_user.id)
-    #@reservations = @reservations.where('date >= ?', Date.today)
+    @reservations = @reservations.where('date >= ?', Date.today)
     @reservations = @reservations.where.not(customer_id: nil)
   end
 

@@ -1,6 +1,6 @@
 .table{
-  width: 100%;
+  width: 70%;
   table-layout: fixed;
   margin-bottom: 1px;
-  
+  margin: 0 auto;
 }

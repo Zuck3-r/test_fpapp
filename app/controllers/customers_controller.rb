@@ -26,6 +26,10 @@ class CustomersController < ApplicationController
   def schedule
     @reservations = Reservation.where(customer_id: current_user.id)
     @reservations = @reservations.where('date >= ?', Date.today)
+    return unless @reservations.empty?
+    
+    flash.now[:info] = '現在、予約している枠は存在しません'
+    render 'show'
   end
   
   def search
