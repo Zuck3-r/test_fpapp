@@ -1,6 +1,18 @@
 ja:
   activerecord:
+    models:
+      planner: プランナー
     attributes:
       planner:
-        name: '名前'
-        email: 'メールアドレス'
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+      customer:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+      reservation:
+        date: 日付：
+        time_table_id: 時間帯：

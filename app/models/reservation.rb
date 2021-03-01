@@ -21,7 +21,7 @@ class Reservation < ApplicationRecord
     return unless date.present?
     return unless time_table_id.present?
 
-    errors.add(:time_table_id, '範囲外です') if date.saturday? && [*START_TIME_ID..END_TIME_ID].exclude?(time_table_id)
+    errors.add(:time_table_id, '土曜日は11時～16時までしか選択できません') if date.saturday? && [*START_TIME_ID..END_TIME_ID].exclude?(time_table_id)
   end
 
   def not_sunday

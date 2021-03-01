@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
 		if @reservation.save
 			redirect_to current_user, info: "登録出来ました"
 		else
-			redirect_to current_user, danger: @reservation.errors.full_messages
+			redirect_to current_user, danger: @reservation.errors.full_messages.join('、')
 		end
 	end
 	
