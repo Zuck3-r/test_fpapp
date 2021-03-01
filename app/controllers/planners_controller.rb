@@ -21,7 +21,7 @@ class PlannersController < ApplicationController
     @planner = Planner.find(current_user.id)
     @skills = @planner.skills
     @reservation = Reservation.new
-    @reservations = Reservation.where(planner_id: @planner.id)
+    @reservations = Reservation.where(planner_id: @planner.id, customer_id: nil)
     @reservations = @reservations.where('date >= ?', Date.today)
   end
   
@@ -32,13 +32,16 @@ class PlannersController < ApplicationController
   def update
     @planner = Planner.find(current_user.id)
     @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
-    redirect_to root_url
+    redirect_to current_user, success: 'スキルの更新に成功しました'
   end
   
   def schedule
     @reservations = Reservation.where(planner_id: current_user.id)
     @reservations = @reservations.where('date >= ?', Date.today)
     @reservations = @reservations.where.not(customer_id: nil)
+    return unless @reservations.empty?
+
+    redirect_to current_user, info: '現在、予約されている枠はありません'
   end
 
   private
