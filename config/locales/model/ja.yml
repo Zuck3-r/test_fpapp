@@ -16,3 +16,7 @@ ja:
       reservation:
         date: 日付：
         time_table_id: 時間帯：
+        planner_id: プランナー
+        customer_id: カスタマー
+      skill:
+        name: スキル名：
