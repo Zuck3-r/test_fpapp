@@ -24,20 +24,18 @@ class CustomersController < ApplicationController
   end
   
   def schedule
-    @reservations = Reservation.where(customer_id: current_user.id)
-    @reservations = @reservations.where('date >= ?', Date.today)
-    return unless @reservations.empty?
-    
-    flash.now[:info] = '現在、予約している枠は存在しません'
-    render 'show'
+      @reservations = Reservation.where(customer_id: current_user.id)
+      @reservations = @reservations.where('date >= ?', Date.today)
+      nil_reservations('現在の予約日程はございません', 'info')
   end
   
   def search
-    @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
-    @reservations = Reservation.where(date: params[:date], planner_id: @planners_ids)
-    if @reservations.empty?
-      flash.now[:danger] = '一致する予約可能な枠がございません'
-      render 'show'
+    if before_today?
+      redirect_to current_user, danger: '明日以降の予約枠しか検索できません'
+    else
+      @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
+      @reservations = Reservation.where(date: params[:date], planner_id: @planners_ids)
+      nil_reservations('一致する予約可能な枠がありません', 'danger')
     end
   end
   
@@ -46,4 +44,16 @@ class CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name, :email, :password, :password_confirmation)
   end
+  
+  def before_today?
+    params[:date].to_date <= Date.today
+  end
+  
+  def nil_reservations(message, label)
+    return unless @reservations.empty?
+        
+    flash.now[:"#{label}"] = message
+    render 'show'
+  end
+  
 end
